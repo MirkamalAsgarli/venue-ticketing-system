@@ -1,0 +1,7 @@
+* { box-sizing: border-box; }
+body { font-family: Arial, sans-serif; margin: 0; background: white; color: #222; }
+header { padding: 12px 20px; border-bottom: 2px solid #333; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+header h1 { margin: 0; font-size: 22px; }
+.main { display: flex; gap: 18px; padding: 18px 20px; }
+.map-part { flex: 1; min-width: 0; }
+.side { width: 310px; }
