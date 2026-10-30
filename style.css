@@ -5,3 +5,12 @@ header h1 { margin: 0; font-size: 22px; }
 .main { display: flex; gap: 18px; padding: 18px 20px; }
 .map-part { flex: 1; min-width: 0; }
 .side { width: 310px; }
+
+#legend span { margin-left: 16px; font-size: 14px; white-space: nowrap; }
+.swatch { display: inline-block; width: 16px; height: 16px; margin-right: 5px; border: 1px solid #555; border-radius: 3px; vertical-align: middle; }
+#viewport { height: 540px; overflow: hidden; background: white; border: 2px solid #333; border-radius: 8px; }
+#world { position: relative; transform-origin: 0 0; }
+.stage { position: absolute; border-radius: 50%; background: #444; color: white; text-align: center; font-weight: bold; letter-spacing: 3px; }
+.row-letter { position: absolute; width: 20px; text-align: center; font-weight: bold; color: #666; }
+.seat { position: absolute; width: 22px; height: 22px; padding: 0; background: var(--fill); border: 1px solid var(--edge); border-radius: 4px; cursor: pointer; }
+.seat:hover { transform: scale(1.15); }

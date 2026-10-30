@@ -34,5 +34,56 @@ function makeSeats() {
   }
 }
 
+function drawVenue() {
+  world.style.width = venue.width + 'px';
+  world.style.height = venue.height + 'px';
+  var stage = document.createElement('div');
+  stage.className = 'stage';
+  stage.textContent = 'STAGE';
+  stage.style.width = venue.stageWidth + 'px';
+  stage.style.height = venue.stageHeight + 'px';
+  stage.style.lineHeight = venue.stageHeight + 'px';
+  stage.style.left = (venue.width - venue.stageWidth) / 2 + 'px';
+  stage.style.top = venue.stageTop + 'px';
+  world.appendChild(stage);
+
+  var leftStart = (venue.width - venue.columns * venue.spacing) / 2;
+  for (var row = 1; row <= venue.rows; row++) {
+    var label = document.createElement('div');
+    label.className = 'row-letter';
+    label.textContent = LETTERS.charAt(row - 1);
+    label.style.left = leftStart - 28 + 'px';
+    label.style.top = venue.gridTop + (row - 1) * venue.spacing + 2 + 'px';
+    world.appendChild(label);
+  }
+
+  for (var i = 0; i < seats.length; i++) {
+    var seat = seats[i];
+    var btn = document.createElement('button');
+    btn.className = 'seat';
+    btn.setAttribute('data-id', seat.id);
+    btn.title = 'Row ' + seat.letter + ', seat ' + seat.number;
+    btn.style.setProperty('--fill', seat.category.fill);
+    btn.style.setProperty('--edge', seat.category.edge);
+    btn.style.left = seat.x + 'px';
+    btn.style.top = seat.y + 'px';
+    seat.button = btn;
+    world.appendChild(btn);
+  }
+}
+
+function drawLegend() {
+  var html = '';
+  for (var i = 0; i < venue.categories.length; i++) {
+    var c = venue.categories[i];
+    html += '<span><i class="swatch" style="background:' + c.fill + '; border-color:' + c.edge + '"></i>' + c.name + ' $' + c.price + '</span>';
+  }
+  html += '<span><i class="swatch" style="background:#ffd83a; border-color:#8a6d00"></i>In cart</span>';
+  html += '<span><i class="swatch" style="background:#b5b5b5; border-color:#888"></i>Unavailable</span>';
+  document.getElementById('legend').innerHTML = html;
+}
+
 document.getElementById('venue-name').textContent = venue.name;
 makeSeats();
+drawVenue();
+drawLegend();
