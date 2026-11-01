@@ -14,3 +14,13 @@ header h1 { margin: 0; font-size: 22px; }
 .row-letter { position: absolute; width: 20px; text-align: center; font-weight: bold; color: #666; }
 .seat { position: absolute; width: 22px; height: 22px; padding: 0; background: var(--fill); border: 1px solid var(--edge); border-radius: 4px; cursor: pointer; }
 .seat:hover { transform: scale(1.15); }
+
+h2 { margin: 0 0 10px 0; font-size: 17px; }
+.box { background: white; border: 2px solid #333; border-radius: 8px; padding: 14px; margin-bottom: 16px; }
+.seat-title { font-size: 17px; font-weight: bold; margin: 0 0 4px 0; }
+.category { margin: 0; color: #555; }
+.price { font-size: 28px; font-weight: bold; margin: 10px 0 4px 0; }
+.status { margin: 0 0 12px 0; color: #555; }
+.hint { color: #666; margin: 0; }
+.add-btn { width: 100%; padding: 10px; background: #2c6fbb; color: white; border: none; border-radius: 5px; font-size: 15px; font-weight: bold; cursor: pointer; }
+.seat.inspected { outline: 3px solid black; outline-offset: 1px; z-index: 2; }

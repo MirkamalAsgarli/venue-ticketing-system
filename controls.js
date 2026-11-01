@@ -87,3 +87,40 @@ document.getElementById('venue-name').textContent = venue.name;
 makeSeats();
 drawVenue();
 drawLegend();
+
+var inspectedId = null;
+var cart = []; // Placeholder for now
+
+function inspectSeat(id) {
+  inspectedId = id;
+  updateAll();
+}
+
+function showDetails() {
+  var seat = seatsById[inspectedId];
+  if (!seat) {
+    detailsDiv.innerHTML = '<p class="hint">Click on a seat to see its details.</p>';
+    return;
+  }
+  var status = 'Available';
+  var buttonText = 'ADD TO CART';
+  var disabled = '';
+
+  detailsDiv.innerHTML =
+    '<p class="seat-title">Row ' + seat.letter + ' - Seat ' + seat.number + '</p>' +
+    '<p class="category">Category: ' + seat.category.name + '</p>' +
+    '<p class="price">$' + seat.category.price + '</p>' +
+    '<p class="status">Status: ' + status + '</p>' +
+    '<button class="add-btn" id="add-btn" ' + disabled + '>' + buttonText + '</button>';
+}
+
+function updateAll() {
+  showDetails();
+}
+
+world.addEventListener('click', function (e) {
+  var id = e.target.getAttribute('data-id');
+  if (id) inspectSeat(id);
+});
+
+updateAll();
