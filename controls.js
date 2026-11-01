@@ -102,9 +102,20 @@ function showDetails() {
     detailsDiv.innerHTML = '<p class="hint">Click on a seat to see its details.</p>';
     return;
   }
+  var inCart = cart.indexOf(seat.id) != -1;
   var status = 'Available';
   var buttonText = 'ADD TO CART';
   var disabled = '';
+
+  if (seat.taken) {
+    status = 'Unavailable';
+    buttonText = 'NOT AVAILABLE';
+    disabled = 'disabled';
+  } else if (inCart) {
+    status = 'Already in your cart';
+    buttonText = 'ALREADY IN CART';
+    disabled = 'disabled';
+  }
 
   detailsDiv.innerHTML =
     '<p class="seat-title">Row ' + seat.letter + ' - Seat ' + seat.number + '</p>' +
@@ -112,9 +123,25 @@ function showDetails() {
     '<p class="price">$' + seat.category.price + '</p>' +
     '<p class="status">Status: ' + status + '</p>' +
     '<button class="add-btn" id="add-btn" ' + disabled + '>' + buttonText + '</button>';
+
+  document.getElementById('add-btn').onclick = function () {
+    if (typeof addToCart === 'function') addToCart(seat.id);
+  };
+}
+
+function showSeatStates() {
+  for (var i = 0; i < seats.length; i++) {
+    var seat = seats[i];
+    var cls = 'seat';
+    if (seat.taken) cls += ' taken';
+    if (cart.indexOf(seat.id) != -1) cls += ' in-cart';
+    if (seat.id == inspectedId) cls += ' inspected';
+    seat.button.className = cls;
+  }
 }
 
 function updateAll() {
+  showSeatStates();
   showDetails();
 }
 

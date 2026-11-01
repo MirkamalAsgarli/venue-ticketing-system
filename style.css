@@ -24,3 +24,8 @@ h2 { margin: 0 0 10px 0; font-size: 17px; }
 .hint { color: #666; margin: 0; }
 .add-btn { width: 100%; padding: 10px; background: #2c6fbb; color: white; border: none; border-radius: 5px; font-size: 15px; font-weight: bold; cursor: pointer; }
 .seat.inspected { outline: 3px solid black; outline-offset: 1px; z-index: 2; }
+
+.seat.taken { background: #b5b5b5; border-color: #888; cursor: not-allowed; }
+.seat.taken:hover { transform: none; }
+.seat.in-cart { background: #ffd83a; border-color: #8a6d00; }
+.add-btn:disabled { background: #b5bcc6; cursor: not-allowed; }
