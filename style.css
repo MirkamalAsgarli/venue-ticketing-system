@@ -29,3 +29,9 @@ h2 { margin: 0 0 10px 0; font-size: 17px; }
 .seat.taken:hover { transform: none; }
 .seat.in-cart { background: #ffd83a; border-color: #8a6d00; }
 .add-btn:disabled { background: #b5bcc6; cursor: not-allowed; }
+
+#cart-list { list-style: none; margin: 0; padding: 0; max-height: 230px; overflow-y: auto; }
+#cart-list li { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid #ddd; font-size: 14px; }
+#cart-list li small { display: block; color: #666; }
+#cart-list button { padding: 4px 8px; background: white; border: 1px solid #c0392b; color: #c0392b; border-radius: 4px; cursor: pointer; }
+.total { font-size: 18px; margin: 12px 0 0 0; }

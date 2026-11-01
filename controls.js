@@ -142,6 +142,7 @@ function showSeatStates() {
 
 function updateAll() {
   showSeatStates();
+  showCart();
   showDetails();
 }
 
@@ -149,5 +150,33 @@ world.addEventListener('click', function (e) {
   var id = e.target.getAttribute('data-id');
   if (id) inspectSeat(id);
 });
+
+function addToCart(id) {
+  var seat = seatsById[id];
+  if (seat.taken || cart.indexOf(id) != -1) return;
+  cart.push(id);
+  updateAll();
+}
+
+function showCart() {
+  cartList.innerHTML = '';
+  var total = 0;
+  if (cart.length == 0) {
+    cartList.innerHTML = '<li>Your cart is empty.</li>';
+  }
+  for (var i = 0; i < cart.length; i++) {
+    var seat = seatsById[cart[i]];
+    total += seat.category.price;
+    var li = document.createElement('li');
+    li.innerHTML = '<span>Row ' + seat.letter + ', Seat ' + seat.number +
+      '<small>' + seat.category.name + ' - $' + seat.category.price + '</small></span>';
+    var removeBtn = document.createElement('button');
+    removeBtn.textContent = 'Remove';
+    removeBtn.setAttribute('data-remove', seat.id);
+    li.appendChild(removeBtn);
+    cartList.appendChild(li);
+  }
+  totalSpan.textContent = '$' + total;
+}
 
 updateAll();
