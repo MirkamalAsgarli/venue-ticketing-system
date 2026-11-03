@@ -179,4 +179,18 @@ function showCart() {
   totalSpan.textContent = '$' + total;
 }
 
+function removeFromCart(id) {
+  var newCart = [];
+  for (var i = 0; i < cart.length; i++) {
+    if (cart[i] != id) newCart.push(cart[i]);
+  }
+  cart = newCart;
+  updateAll();
+}
+
+cartList.addEventListener('click', function (e) {
+  var id = e.target.getAttribute('data-remove');
+  if (id) removeFromCart(id);
+});
+
 updateAll();
