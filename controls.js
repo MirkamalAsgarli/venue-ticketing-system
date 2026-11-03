@@ -155,6 +155,7 @@ function addToCart(id) {
   var seat = seatsById[id];
   if (seat.taken || cart.indexOf(id) != -1) return;
   cart.push(id);
+  saveCart();
   updateAll();
 }
 
@@ -185,6 +186,7 @@ function removeFromCart(id) {
     if (cart[i] != id) newCart.push(cart[i]);
   }
   cart = newCart;
+  saveCart();
   updateAll();
 }
 
@@ -193,4 +195,27 @@ cartList.addEventListener('click', function (e) {
   if (id) removeFromCart(id);
 });
 
+function saveCart() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+}
+
+function loadCart() {
+  var saved = localStorage.getItem(STORAGE_KEY);
+  cart = [];
+  if (saved) {
+    try {
+      var list = JSON.parse(saved);
+      for (var i = 0; i < list.length; i++) {
+        var seat = seatsById[list[i]];
+        if (seat && !seat.taken && cart.indexOf(list[i]) == -1) {
+          cart.push(list[i]);
+        }
+      }
+    } catch (e) {
+      cart = [];
+    }
+  }
+}
+
+loadCart();
 updateAll();
