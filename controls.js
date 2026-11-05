@@ -217,5 +217,61 @@ function loadCart() {
   }
 }
 
+var scale = 1;
+var posX = 0;
+var posY = 0;
+
+function applyView() {
+  var w = venue.width * scale;
+  var h = venue.height * scale;
+  var vw = viewport.clientWidth;
+  var vh = viewport.clientHeight;
+
+  if (posX > vw - 100) posX = vw - 100;
+  if (posX < 100 - w) posX = 100 - w;
+  if (posY > vh - 100) posY = vh - 100;
+  if (posY < 100 - h) posY = 100 - h;
+
+  world.style.transform = 'translate(' + posX + 'px, ' + posY + 'px) scale(' + scale + ')';
+}
+
+function zoom(factor) {
+  var newScale = scale * factor;
+  if (newScale < 0.4) newScale = 0.4;
+  if (newScale > 3) newScale = 3;
+
+  var midX = viewport.clientWidth / 2;
+  var midY = viewport.clientHeight / 2;
+  posX = midX - (midX - posX) * (newScale / scale);
+  posY = midY - (midY - posY) * (newScale / scale);
+  scale = newScale;
+  applyView();
+}
+
+function move(dx, dy) {
+  posX += dx;
+  posY += dy;
+  applyView();
+}
+
+function resetView() {
+  var vw = viewport.clientWidth;
+  var vh = viewport.clientHeight;
+  if (vw == 0 || vh == 0) return;   
+  scale = Math.min(vw / venue.width, vh / venue.height);
+  posX = (vw - venue.width * scale) / 2;
+  posY = (vh - venue.height * scale) / 2;
+  applyView();
+}
+
+document.getElementById('zoom-in').onclick = function () { zoom(1.25); };
+document.getElementById('zoom-out').onclick = function () { zoom(0.8); };
+document.getElementById('move-up').onclick = function () { move(0, 80); };
+document.getElementById('move-down').onclick = function () { move(0, -80); };
+document.getElementById('move-left').onclick = function () { move(80, 0); };
+document.getElementById('move-right').onclick = function () { move(-80, 0); };
+document.getElementById('reset').onclick = resetView;
+
 loadCart();
 updateAll();
+resetView();

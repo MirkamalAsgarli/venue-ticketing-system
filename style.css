@@ -35,3 +35,7 @@ h2 { margin: 0 0 10px 0; font-size: 17px; }
 #cart-list li small { display: block; color: #666; }
 #cart-list button { padding: 4px 8px; background: white; border: 1px solid #c0392b; color: #c0392b; border-radius: 4px; cursor: pointer; }
 .total { font-size: 18px; margin: 12px 0 0 0; }
+
+.buttons { margin-bottom: 10px; }
+.buttons button { padding: 7px 10px; margin: 0 4px 4px 0; background: white; border: 1px solid #555; border-radius: 5px; cursor: pointer; }
+.buttons button:hover { background: #eee; }
