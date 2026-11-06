@@ -272,6 +272,9 @@ document.getElementById('move-left').onclick = function () { move(80, 0); };
 document.getElementById('move-right').onclick = function () { move(-80, 0); };
 document.getElementById('reset').onclick = resetView;
 
+window.addEventListener('resize', resetView);
+window.addEventListener('load', resetView);
+
 loadCart();
 updateAll();
 resetView();
